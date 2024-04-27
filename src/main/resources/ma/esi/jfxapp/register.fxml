@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="482.0" prefWidth="542.0" style="-fx-background-color: #3f81e3;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.esi.jfxapp.controllers.RegisterController">
+   <children>
+      <VBox alignment="CENTER" layoutX="125.0" prefHeight="482.0" prefWidth="291.0" spacing="15.0" style="-fx-background-color: #3f81e3;">
+          <padding>
+              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+          </padding>
+         <children>
+            <Label text="S'enregistrer" textFill="#f4f7ff">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Label>
+            <Label />
+            <TextField fx:id="fullNameField" prefHeight="26.0" prefWidth="200.0" promptText="Nom et Prénom ...." />
+            <TextField fx:id="GSMField" layoutX="30.0" layoutY="272.0" prefHeight="26.0" prefWidth="200.0" promptText="GSM..." />
+            <TextField fx:id="emailField" layoutX="30.0" layoutY="243.0" prefHeight="26.0" prefWidth="200.0" promptText="E-mail..." />
+            <PasswordField fx:id="passwordField" promptText="Mot de passe..." />
+            <PasswordField fx:id="confirmationField" promptText="Confirmer votre mot de passe ..." />
+            <Label layoutX="156.0" layoutY="150.0" />
+            <Button fx:id="registerButton" contentDisplay="CENTER" layoutX="80.0" layoutY="312.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="152.0" style="-fx-background-color: #e81b0e;" text="S'enregistrer" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
