@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Invoice {
     private Integer id;
     private double total;
-    private String deliveryType;
+    private DeliveryType deliveryType;
     private Integer clientId;
     private Integer deliveryId;
     private ArrayList<Order> orders;
 
-    public Invoice(Integer id, double total, String deliveryType, Integer clientId, Integer deliveryId) {
+    public Invoice(Integer id, double total, DeliveryType deliveryType, Integer clientId, Integer deliveryId) {
         this.id = id;
         this.total = total;
         this.deliveryType = deliveryType;
@@ -40,11 +40,11 @@ public class Invoice {
         this.total = total;
     }
 
-    public String getDeliveryType() {
+    public DeliveryType getDeliveryType() {
         return deliveryType;
     }
 
-    public void setDeliveryType(String deliveryType) {
+    public void setDeliveryType(DeliveryType deliveryType) {
         this.deliveryType = deliveryType;
     }
 

@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 public class OrderDAO {
     public static boolean save(Order order) {
-        try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("INSERT INTO orders(product_id, qte, id_client) VALUES (?,?,?)")) {
+        try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("INSERT INTO orders(product_id, qte,total,invoice_id) VALUES (?,?,?,?)")) {
             pstmt.setInt(1, order.getProductId());
             pstmt.setInt(2, order.getQuantity());
-            pstmt.setInt(3, order.getClientId());
+            pstmt.setDouble(3, order.getTotal());
+            pstmt.setInt(4, order.getInvoiceId());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -30,23 +31,14 @@ public class OrderDAO {
         }
     }
 
-    public static ArrayList<Order> findByClientId(Integer clientId) throws SQLException {
-        ArrayList<Order> orders = new ArrayList<>();
-        PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("SELECT * FROM orders WHERE id_client = ?");
-        pstmt.setInt(1, clientId);
-        ResultSet rs = pstmt.executeQuery();
-        while (rs.next()) {
-            orders.add(new Order(rs.getInt("id"), rs.getInt("product_id"), rs.getInt("qte"), rs.getInt("id_client")));
-        }
-        return orders;
-    }
+
 
     public static ArrayList<Order> findAll() throws SQLException {
         ArrayList<Order> orders = new ArrayList<>();
         PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("SELECT * FROM orders");
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
-            orders.add(new Order(rs.getInt("id"), rs.getInt("product_id"), rs.getInt("qte"), rs.getInt("id_client")));
+            orders.add(new Order(rs.getInt("id"), rs.getInt("product_id"), rs.getInt("qte"),rs.getDouble("total"),rs.getInt("invoice_id")));
         }
         return orders;
     }

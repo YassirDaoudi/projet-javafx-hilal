@@ -11,7 +11,7 @@ class ProductDAOTest {
 
     @Test
     void save() {
-        Product product = new Product(1, "Product A", 10);
+        Product product = new Product(1, "Product A", 10,21.2);
         assertTrue(ProductDAO.save(product));
     }
     @Test
@@ -35,8 +35,8 @@ class ProductDAOTest {
     }
     @Test
     void find() throws SQLException {
-        DBConnection.getConnection().createStatement().executeUpdate("INSERT INTO products VALUES (9999999, 'Product A', 10)");
-        Product product = new Product(9999999, "Product A", 10);
+        DBConnection.getConnection().createStatement().executeUpdate("INSERT INTO products VALUES (9999999, 'Product A', 10,12.2)");
+        Product product = new Product(9999999, "Product A", 10,12.2);
         Product productFound = ProductDAO.find(product.getLabel()).get(0);
         assertEquals(productFound.getId(), product.getId());
         assertEquals(productFound.getLabel(), product.getLabel());
@@ -55,6 +55,10 @@ class ProductDAOTest {
         for (int i = 0; i < 5; i++) {
             ProductDAO.delete("Product"+i);
         }
+    }
+    @Test
+    void getPrice() throws SQLException {
+        System.out.println(ProductDAO.getPrice(6));
     }
 
 

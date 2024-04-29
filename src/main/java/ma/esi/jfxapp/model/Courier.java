@@ -3,10 +3,10 @@ package ma.esi.jfxapp.model;
 public class Courier {
     private Integer id;
     private String name;
-    private String status;
+    private CourierStatus status;
 
     // Constructor
-    public Courier(Integer id, String name, String status) {
+    public Courier(Integer id, String name, CourierStatus status) {
         this.id = id;
         this.name = name;
         this.status = status;
@@ -29,11 +29,11 @@ public class Courier {
         this.name = name;
     }
 
-    public String getStatus() {
+    public CourierStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(CourierStatus status) {
         this.status = status;
     }
 

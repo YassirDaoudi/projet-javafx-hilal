@@ -4,12 +4,22 @@ public class Product {
     private Integer id;
     private String label;
     private Integer quantityInStock;
+    private Double price;
 
     // Constructor
-    public Product(Integer id, String label, Integer quantityInStock) {
+    public Product(Integer id, String label, Integer quantityInStock,Double price) {
         this.id = id;
         this.label = label;
         this.quantityInStock = quantityInStock;
+        this.price = price;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     // Getters and Setters
@@ -37,13 +47,13 @@ public class Product {
         this.quantityInStock = quantityInStock;
     }
 
-    // toString method
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", label='" + label + '\'' +
                 ", quantityInStock=" + quantityInStock +
+                ", price=" + price +
                 '}';
     }
 }

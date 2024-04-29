@@ -1,17 +1,47 @@
 package ma.esi.jfxapp.model;
 
+import java.sql.SQLException;
+
 public class Order {
     private Integer id;
     private Integer productId;
     private Integer quantity;
-    private Integer clientId;
+    private Double total;
+    private Integer invoiceId;
 
     // Constructor
-    public Order(Integer id, Integer productId, Integer quantity, Integer clientId) {
+    public Order(Integer id, Integer productId, Integer quantity, Double total, Integer invoiceId) throws SQLException {
         this.id = id;
         this.productId = productId;
         this.quantity = quantity;
-        this.clientId = clientId;
+        this.invoiceId = invoiceId;
+        this.total = total;
+    }
+    public Order(Integer id, Integer productId, Integer quantity, Integer invoiceId) throws SQLException {
+        this.id = id;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.invoiceId = invoiceId;
+        this.total = Math.round(quantity * ProductDAO.getPrice(productId) * 100.)/100.;
+    }
+
+
+
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public Integer getInvoiceId() {
+        return invoiceId;
+    }
+
+    public void setInvoiceId(Integer invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
     // Getters and Setters
@@ -39,22 +69,15 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public Integer getClientId() {
-        return clientId;
-    }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
-    }
-
-    // toString method
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
                 ", productId=" + productId +
                 ", quantity=" + quantity +
-                ", clientId=" + clientId +
+                ", total=" + total +
+                ", invoiceId=" + invoiceId +
                 '}';
     }
 }
