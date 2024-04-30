@@ -8,7 +8,6 @@ public class Invoice {
     private DeliveryType deliveryType;
     private Integer clientId;
     private Integer deliveryId;
-    private ArrayList<Order> orders;
 
     public Invoice(Integer id, double total, DeliveryType deliveryType, Integer clientId, Integer deliveryId) {
         this.id = id;

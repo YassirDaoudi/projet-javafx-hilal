@@ -11,4 +11,9 @@ public enum CourierStatus {
         this.value=value;
     }
 
+    public static CourierStatus getByValue(String value) {
+        if (value.equals("free")) return FREE;
+        else if (value.equals("busy")) return BUSY;
+        else throw new RuntimeException("No value "+value+"in Enum CourierStatus");
+    }
 }

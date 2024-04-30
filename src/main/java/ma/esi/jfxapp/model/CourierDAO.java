@@ -44,16 +44,14 @@ public class CourierDAO {
         }
     }
 
-    public static ArrayList<Courier> findAll() {
+    public static ArrayList<Courier> findAll() throws SQLException {
         ArrayList<Courier> couriers = new ArrayList<>();
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM couriers")) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                couriers.add(new Courier(rs.getInt("id"), rs.getString("name"), CourierStatus.valueOf(rs.getString("status"))));
+                couriers.add(new Courier(rs.getInt("id"), rs.getString("name"), CourierStatus.getByValue(rs.getString("status"))));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return couriers;
     }

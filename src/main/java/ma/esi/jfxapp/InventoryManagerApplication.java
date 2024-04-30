@@ -12,7 +12,7 @@ public class InventoryManagerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         InventoryManagerApplication.stage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(InventoryManagerApplication.class.getResource("authentication.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(InventoryManagerApplication.class.getResource("main.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);

@@ -47,7 +47,7 @@ public class DeliveryDAO {
         }
     }
 
-    public static ArrayList<Delivery> findAll() {
+    public static ArrayList<Delivery> findAll() throws SQLException {
         ArrayList<Delivery> deliveries = new ArrayList<>();
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM deliveries")) {
@@ -60,8 +60,6 @@ public class DeliveryDAO {
                 delivery.setCourierId(rs.getInt("courier_id"));
                 deliveries.add(delivery);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return deliveries;
     }

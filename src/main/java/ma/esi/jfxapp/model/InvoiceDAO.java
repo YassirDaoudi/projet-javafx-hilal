@@ -34,7 +34,7 @@ public class InvoiceDAO {
         }
     }
 
-    public static ArrayList<Invoice> findAll() {
+    public static ArrayList<Invoice> findAll() throws SQLException {
         ArrayList<Invoice> invoices = new ArrayList<>();
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM invoices")) {
@@ -44,16 +44,15 @@ public class InvoiceDAO {
                 invoice.setId(rs.getInt("id"));
                 invoice.setTotal(rs.getDouble("total"));
                 // Assuming deliveryType is stored as a string in the database
-                invoice.setDeliveryType(DeliveryType.valueOf(rs.getString("del_type")));
+                invoice.setDeliveryType(DeliveryType.getByString(rs.getString("del_type")));
                 invoice.setClientId(rs.getInt("client_id"));
                 invoice.setDeliveryId(rs.getInt("delivery_id"));
                 invoices.add(invoice);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return invoices;
     }
+
 
     public static Invoice findById(int id) {
         Invoice invoice = null;

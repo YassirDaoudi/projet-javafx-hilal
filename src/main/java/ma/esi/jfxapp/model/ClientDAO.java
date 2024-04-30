@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ClientDAO {
+public class ClientDAO  {
     public static boolean save(Client client){
         try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("INSERT INTO clients(name, address, email, tel) VALUES (?,?,?,?)")){
             pstmt.setString(1,client.getName());
@@ -50,6 +50,7 @@ public class ClientDAO {
         }
         return clients;
     }
+
     public static ArrayList<Client> findAll() throws SQLException {
         ArrayList<Client> clients = new ArrayList<>();
         PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("SELECT * FROM clients;");
