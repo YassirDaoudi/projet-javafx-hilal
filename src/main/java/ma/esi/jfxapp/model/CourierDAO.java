@@ -8,10 +8,23 @@ import java.util.ArrayList;
 
 public class CourierDAO {
 
+
     public static boolean save(Courier courier){
         try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("INSERT INTO couriers(name, status) VALUES (?,?)")){
             pstmt.setString(1,courier.getName());
             pstmt.setString(2,courier.getStatus().value);
+            pstmt.executeUpdate();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static boolean update(Integer id,Courier courier){
+        try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("UPDATE couriers set name = ?,status  =? where id=?")){
+            pstmt.setString(1,courier.getName());
+            pstmt.setString(2,courier.getStatus().value);
+            pstmt.setInt(3,id);
             pstmt.executeUpdate();
             return true;
         }catch (Exception e){

@@ -16,6 +16,10 @@ public class Delivery {
         this.courierId = courierId;
     }
 
+    public Delivery() {
+
+    }
+
     // Getters and Setters
     public Integer getId() {
         return id;

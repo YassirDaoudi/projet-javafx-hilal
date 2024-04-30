@@ -18,6 +18,10 @@ public class Invoice {
         this.deliveryId = deliveryId;
     }
 
+    public Invoice() {
+
+    }
+
     @Override
     public String toString() {
         return "Invoice ID: " + id + "\nTotal: $" + total + "\nDelivery Type: " + deliveryType + "\nClient ID: " + clientId + "\nDelivery ID: " + deliveryId;
