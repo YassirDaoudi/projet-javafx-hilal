@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ClientDAO  {
-    public static boolean save(Client client){
+    public boolean save(Client client){
         try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("INSERT INTO clients(name, address, email, tel) VALUES (?,?,?,?)")){
             pstmt.setString(1,client.getName());
             pstmt.setString(2,client.getAddress());
@@ -20,7 +20,7 @@ public class ClientDAO  {
         }
     }
 
-    public static boolean delete(Integer id ){
+    public boolean delete(Integer id){
         try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("DELETE FROM clients where id = ?")){
             pstmt.setInt(1,id);
             pstmt.executeUpdate();
@@ -30,17 +30,8 @@ public class ClientDAO  {
             return false;
         }
     }
-    public static boolean delete(String email ){
-        try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("DELETE FROM clients where email = ?")){
-            pstmt.setString(1,email);
-            pstmt.executeUpdate();
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-    }
-    public static ArrayList<Client> find(String email) throws SQLException {
+
+    public ArrayList<Client> find(String email) throws SQLException {
         ArrayList<Client> clients = new ArrayList<>();
         PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("SELECT * FROM clients where email = ?");
         pstmt.setString(1,email);
@@ -51,7 +42,18 @@ public class ClientDAO  {
         return clients;
     }
 
-    public static ArrayList<Client> findAll() throws SQLException {
+    public boolean delete(String email){
+        try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("DELETE FROM clients where email = ?")){
+            pstmt.setString(1,email);
+            pstmt.executeUpdate();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public ArrayList<Client> findAll() throws SQLException {
         ArrayList<Client> clients = new ArrayList<>();
         PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("SELECT * FROM clients;");
         ResultSet rs = pstmt.executeQuery();

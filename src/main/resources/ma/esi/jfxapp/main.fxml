@@ -33,6 +33,7 @@
 -->
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -40,9 +41,10 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -90,11 +92,11 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.2588809946714032, 0.7595470692717584" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.1800621669626998, 0.7029307282415631" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane prefWidth="218.0">
           <children>
-            <Label alignment="CENTER" layoutX="71.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Navigation" textAlignment="CENTER" wrapText="false">
+            <Label alignment="CENTER" layoutX="35.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Navigation" textAlignment="CENTER" wrapText="false">
               <font>
                 <Font size="18.0" fx:id="x1" />
               </font>
@@ -102,27 +104,27 @@
                 <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
               </textFill>
             </Label>
-                  <Label fx:id="productsNav" layoutX="4.0" layoutY="131.0" onMouseClicked="#OnProductsClicked" prefHeight="28.0" prefWidth="220.0" style="-fx-background-color: #f3f3f3;" styleClass="nav" text="Products">
+                  <Label fx:id="productsNav" layoutY="131.0" onMouseClicked="#OnProductsClicked" prefHeight="28.0" prefWidth="158.0" style="-fx-background-color: #f3f3f3;" styleClass="nav" text="Products">
                      <padding>
                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="clientsNav" layoutX="4.0" layoutY="97.0" onMouseClicked="#OnClickClients" prefHeight="28.0" prefWidth="220.0" style="-fx-background-color: #f3f3f3;" styleClass="nav" text="Clients">
+                  <Label fx:id="clientsNav" layoutY="97.0" onMouseClicked="#OnClickClients" prefHeight="28.0" prefWidth="158.0" style="-fx-background-color: #f3f3f3;" styleClass="nav" text="Clients">
                      <padding>
                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="deliveriesNav" layoutX="4.0" layoutY="197.0" onMouseClicked="#OnDeliveriesClicked" prefHeight="28.0" prefWidth="220.0" style="-fx-background-color: #f3f3f3;" styleClass="nav" text="Deliveries">
+                  <Label fx:id="deliveriesNav" layoutY="197.0" onMouseClicked="#OnDeliveriesClicked" prefHeight="28.0" prefWidth="158.0" style="-fx-background-color: #f3f3f3;" styleClass="nav" text="Deliveries">
                      <padding>
                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="couriersNav" layoutX="4.0" layoutY="230.0" onMouseClicked="#OnCouriersClicked" prefHeight="28.0" prefWidth="220.0" style="-fx-background-color: #f3f3f3;" styleClass="nav" text="Couriers">
+                  <Label fx:id="couriersNav" layoutY="230.0" onMouseClicked="#OnCouriersClicked" prefHeight="28.0" prefWidth="158.0" style="-fx-background-color: #f3f3f3;" styleClass="nav" text="Couriers">
                      <padding>
                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="invoicesNav" layoutX="4.0" layoutY="164.0" onMouseClicked="#OnInvoicesClicked" prefHeight="28.0" prefWidth="220.0" style="-fx-background-color: #f3f3f3;" styleClass="nav" text="Invoices">
+                  <Label fx:id="invoicesNav" layoutY="164.0" onMouseClicked="#OnInvoicesClicked" prefHeight="28.0" prefWidth="158.0" style="-fx-background-color: #f3f3f3;" styleClass="nav" text="Invoices">
                      <padding>
                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                      </padding>
@@ -133,12 +135,8 @@
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="542.0" prefWidth="444.0">
               <children>
-                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="404.0" style="&#10;" text="Clients" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <TableView fx:id="Table" layoutX="21.0" layoutY="64.0" prefHeight="414.0" prefWidth="404.0">
-                          <columns>
-                            <TableColumn maxWidth="1.7976931348623157E308" prefWidth="112.7999849319458" text="C1" />
-                            <TableColumn maxWidth="-1.0" prefWidth="118.39996337890625" text="C2" />
-                          </columns>
+                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="366.0" style="&#10;" text="Clients" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                        <TableView fx:id="Table" layoutX="20.0" layoutY="64.0" onMouseClicked="#onTableClicked" prefHeight="414.0" prefWidth="404.0">
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
@@ -147,11 +145,55 @@
             </AnchorPane>
           </content>
         </ScrollPane>
-        <AnchorPane>
-          <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-          </children>
-        </AnchorPane>
+            <BorderPane>
+               <center>
+                  <VBox fx:id="detailsVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="265.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="46.0" text="Label" HBox.hgrow="ALWAYS" />
+                              <TextField prefHeight="26.0" prefWidth="189.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="60.0" prefHeight="42.0" prefWidth="265.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="46.0" text="Label" HBox.hgrow="ALWAYS" />
+                              <TextField prefHeight="26.0" prefWidth="189.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="103.0" prefHeight="42.0" prefWidth="265.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="46.0" text="Label" HBox.hgrow="ALWAYS" />
+                              <DatePicker prefHeight="26.0" prefWidth="198.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets top="50.0" />
+                     </padding>
+                  </VBox>
+               </center>
+               <top>
+                  <Pane prefHeight="57.0" prefWidth="265.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label layoutX="105.0" layoutY="15.0" text="Details" textAlignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </top>
+            </BorderPane>
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">

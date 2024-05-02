@@ -12,8 +12,8 @@ class ClientDAOTest {
     @Test
     void save() {
         Client client = new Client(1,"Mr client","Nowhere Street","client@client.com","0522539236");
-        assertTrue(ClientDAO.save(client));
-        ClientDAO.delete("client@client.com");
+        assertTrue(new ClientDAO().save(client));
+        new ClientDAO().delete("client@client.com");
 
     }
 
@@ -22,7 +22,7 @@ class ClientDAOTest {
 
         try {
             DBConnection.getConnection().createStatement().executeUpdate("INSERT into clients values (99999,'sdfd','fadf','adfaf','adfdf')");
-            assertTrue(ClientDAO.delete(99999));
+            assertTrue(new ClientDAO().delete(99999));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,7 +33,7 @@ class ClientDAOTest {
     void deleteEmail() {
         try {
             DBConnection.getConnection().createStatement().executeUpdate("INSERT into clients(name, address, email, tel) values ('sdfd','fadf','email','adfdf')");
-            assertTrue(ClientDAO.delete("email"));
+            assertTrue(new ClientDAO().delete("email"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,10 +43,10 @@ class ClientDAOTest {
     void find() throws SQLException {
         DBConnection.getConnection().createStatement().executeUpdate("INSERT into clients(id,name, address, email, tel) values (9999999,'sdfd','fadf','email','adfdf')");
         Client client = new Client(9999999,"sdfd","fadf","email","adfdf");
-        Client client1 = ClientDAO.find(client.getEmail()).get(0);
+        Client client1 = new ClientDAO().find(client.getEmail()).get(0);
         assertEquals(client1, client);
-        assertTrue(ClientDAO.find("").isEmpty());
-        ClientDAO.delete(9999999);
+        assertTrue(new ClientDAO().find("").isEmpty());
+        new ClientDAO().delete(9999999);
 
     }
     @Test
@@ -54,11 +54,11 @@ class ClientDAOTest {
         for (int i = 0; i < 5; i++) {
             DBConnection.getConnection().createStatement().executeUpdate("INSERT into clients(name, address, email, tel) values ('sdfd','fadf','email"+i+"','adfdf')");
         }
-        ArrayList<Client> clients = ClientDAO.findAll();
+        ArrayList<Client> clients = new ClientDAO().findAll();
         System.out.println(clients);
         assertEquals(clients.size(),5);
         for (int i = 0; i < 5; i++) {
-            ClientDAO.delete("email"+i);
+            new ClientDAO().delete("email"+i);
         }
 
     }

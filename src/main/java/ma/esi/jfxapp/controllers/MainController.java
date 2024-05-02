@@ -4,10 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import ma.esi.jfxapp.model.*;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -15,7 +15,6 @@ import java.lang.reflect.Field;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 
@@ -24,21 +23,13 @@ public class MainController implements Initializable {
     private TableView Table;
 
     @FXML
-    private Label clientsNav;
-    @FXML
-    private Label productsNav;
-    @FXML
-    private Label invoicesNav;
-    @FXML
-    private Label couriersNav;
-    @FXML
-    private Label deliveriesNav;
+    private VBox detailsVBox;
 
 
     @FXML
     public void OnInvoicesClicked() {
         try {
-            ObservableList<Invoice> list = FXCollections.observableArrayList(InvoiceDAO.findAll());
+            ObservableList<Invoice> list = FXCollections.observableArrayList(new InvoiceDAO().findAll());
             if (!list.isEmpty()) setTableColumns(Table,list);
             else setTableColumns(Table,Invoice.class.getDeclaredFields());
 //            Table.refresh();
@@ -51,7 +42,7 @@ public class MainController implements Initializable {
     @FXML
     public void OnCouriersClicked() {
         try {
-            ObservableList<Courier> list = FXCollections.observableArrayList(CourierDAO.findAll());
+            ObservableList<Courier> list = FXCollections.observableArrayList(new CourierDAO().findAll());
             if (!list.isEmpty()) setTableColumns(Table,list);
             else setTableColumns(Table,Courier.class.getDeclaredFields());
 //            Table.refresh();
@@ -61,10 +52,12 @@ public class MainController implements Initializable {
             ex.printStackTrace();
         }
     }
+
+
     @FXML
     public void OnProductsClicked() {
         try {
-            ObservableList<Product> list = FXCollections.observableArrayList(ProductDAO.findAll());
+            ObservableList<Product> list = FXCollections.observableArrayList(new ProductDAO().findAll());
             if (!list.isEmpty()) setTableColumns(Table,list);
             else setTableColumns(Table,Product.class.getDeclaredFields());
 
@@ -76,7 +69,7 @@ public class MainController implements Initializable {
     @FXML
     public void OnDeliveriesClicked() {
         try {
-            ObservableList<Delivery> list = FXCollections.observableArrayList(DeliveryDAO.findAll());
+            ObservableList<Delivery> list = FXCollections.observableArrayList(new DeliveryDAO().findAll());
             if (!list.isEmpty()) setTableColumns(Table,list);
             else setTableColumns(Table,Delivery.class.getDeclaredFields());
 //            Table.refresh();
@@ -92,7 +85,7 @@ public class MainController implements Initializable {
     @FXML
     public void OnClickClients() {
         try {
-            ObservableList<Client> list = FXCollections.observableArrayList(ClientDAO.findAll());
+            ObservableList<Client> list = FXCollections.observableArrayList(new ClientDAO().findAll());
 
             if (!list.isEmpty()) setTableColumns(Table,list);
             else setTableColumns(Table,Client.class.getDeclaredFields());
@@ -126,6 +119,16 @@ public class MainController implements Initializable {
 
         }
         table.getColumns().setAll(cols);
+
+    }
+    @FXML
+    public void onTableClicked(){
+        Object o = Table.getSelectionModel().getSelectedItem();
+        generateDetailsView(o);
+    }
+
+    private <T> void generateDetailsView(T o) {
+        Field[] fields = o.getClass().getDeclaredFields();
 
     }
 

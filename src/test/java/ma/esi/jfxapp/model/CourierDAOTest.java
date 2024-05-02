@@ -12,7 +12,7 @@ class CourierDAOTest {
     @Test
     void save() throws SQLException {
         Courier c  = new Courier(8,"mhmd",CourierStatus.FREE);
-        CourierDAO.save(c);
+        new CourierDAO().save(c);
         ResultSet rs = DBConnection.getConnection().createStatement().executeQuery("Select * from couriers where name='"+c.getName()+"'");
         rs.next();
         assertEquals(rs.getString(2),c.getName());

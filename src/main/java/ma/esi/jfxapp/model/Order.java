@@ -22,7 +22,7 @@ public class Order {
         this.productId = productId;
         this.quantity = quantity;
         this.invoiceId = invoiceId;
-        this.total = Math.round(quantity * ProductDAO.getPrice(productId) * 100.)/100.;
+        this.total = Math.round(quantity * new ProductDAO().getPrice(productId) * 100.)/100.;
     }
 
 

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductDAO {
-    public static boolean save(Product product){
+    public boolean save(Product product){
         try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("INSERT INTO products(id, label, qt_in_stock,price) VALUES (?,?,?,?)")){
             pstmt.setInt(1, product.getId());
             pstmt.setString(2, product.getLabel());
@@ -19,7 +19,8 @@ public class ProductDAO {
             return false;
         }
     }
-    public static Double getPrice(Integer productId ) throws SQLException {
+
+    public Double getPrice(Integer productId) throws SQLException {
         try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("SELECT price from products where id = ?")){
             pstmt.setDouble(1,productId);
             ResultSet rs =pstmt.executeQuery();
@@ -30,7 +31,8 @@ public class ProductDAO {
             return rs.getDouble("price");
         }
     }
-    public static boolean delete(Integer id){
+
+    public boolean delete(Integer id){
         try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("DELETE FROM products WHERE id = ?")){
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
@@ -41,7 +43,7 @@ public class ProductDAO {
         }
     }
 
-    public static boolean delete(String label){
+    public boolean delete(String label){
         try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("DELETE FROM products WHERE label = ?")){
             pstmt.setString(1, label);
             pstmt.executeUpdate();
@@ -51,7 +53,8 @@ public class ProductDAO {
             return false;
         }
     }
-    public static ArrayList<Product> find(String label) throws SQLException {
+
+    public ArrayList<Product> find(String label) throws SQLException {
         ArrayList<Product> products = new ArrayList<>();
         PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("SELECT * FROM products WHERE label = ?");
         pstmt.setString(1, label);
@@ -62,7 +65,7 @@ public class ProductDAO {
         return products;
     }
 
-    public static ArrayList<Product> findAll() throws SQLException {
+    public ArrayList<Product> findAll() throws SQLException {
         ArrayList<Product> products = new ArrayList<>();
         PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("SELECT * FROM products");
         ResultSet rs = pstmt.executeQuery();
@@ -71,5 +74,4 @@ public class ProductDAO {
         }
         return products;
     }
-
 }
