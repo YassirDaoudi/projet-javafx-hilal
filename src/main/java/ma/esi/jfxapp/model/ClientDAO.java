@@ -1,5 +1,6 @@
 package ma.esi.jfxapp.model;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,5 +62,15 @@ public class ClientDAO  {
             clients.add(new Client(rs.getInt("id"),rs.getString("name"),rs.getString("address"),rs.getString("email"),rs.getString("tel")));
         }
         return clients;
+    }
+    public void update(Client client) throws SQLException {
+        try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement("UPDATE clients set name=?,address=?,email=?,tel=? where id=? ")){
+            pstmt.setString(1, client.getName());
+            pstmt.setString(2, client.getAddress());
+            pstmt.setString(3, client.getEmail());
+            pstmt.setString(4, client.getTel());
+            pstmt.setInt(5, client.getId());
+            pstmt.executeUpdate();
+        }
     }
 }

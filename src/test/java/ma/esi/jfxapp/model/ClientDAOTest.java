@@ -62,4 +62,9 @@ class ClientDAOTest {
         }
 
     }
+
+    @Test
+    void update() throws SQLException {
+        new ClientDAO().update(new Client(1,"Client1","nowhere","email@email.com","063632683"));
+    }
 }

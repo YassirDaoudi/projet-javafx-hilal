@@ -4,12 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import ma.esi.jfxapp.model.*;
-import org.apache.commons.lang3.text.WordUtils;
+import org.apache.commons.text.WordUtils;
 
 import java.lang.reflect.Field;
 import java.net.URL;
@@ -124,12 +127,45 @@ public class MainController implements Initializable {
     @FXML
     public void onTableClicked(){
         Object o = Table.getSelectionModel().getSelectedItem();
-        generateDetailsView(o);
+        try {
+            generateDetailsView(o);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    private <T> void generateDetailsView(T o) {
+    private <T> void generateDetailsView(T o) throws Exception {
         Field[] fields = o.getClass().getDeclaredFields();
+        ArrayList<InputControl<?>> controls = new ArrayList<>();
 
+        for (Field field : fields) {
+            HBox container = new HBox();
+            container.setAlignment(Pos.CENTER_LEFT);
+            container.setPadding(new Insets(0,10,0,10));
+
+
+            //create label
+            Label label = new Label(WordUtils.capitalize(field.getName()));
+            label.setAlignment(Pos.CENTER_LEFT);
+            label.setPrefWidth(50);
+            HBox.setHgrow(label, Priority.ALWAYS);
+
+            //create input field
+            InputControl<?> inputControl = DetailsSectionControlsFactory.getInputControl(field);
+
+
+            HBox.setHgrow(inputControl.getInputField(),Priority.ALWAYS);
+
+            //add them to the hbox
+            container.getChildren().addAll(label,inputControl.getInputField());
+
+            //add hbox to the parent vbox
+            detailsVBox.getChildren().add(container);
+
+            //add the input field to the controls list
+            controls.add(inputControl);
+
+        }
     }
 
 

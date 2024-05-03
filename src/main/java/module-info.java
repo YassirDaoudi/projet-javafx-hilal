@@ -4,7 +4,7 @@ module ma.esi.jfxapp {
     requires org.postgresql.jdbc;
     requires org.controlsfx.controls;
     requires java.sql;
-    requires org.apache.commons.lang3;
+    requires org.apache.commons.text;
 
     opens ma.esi.jfxapp to javafx.fxml;
     opens ma.esi.jfxapp.controllers to  javafx.fxml;
